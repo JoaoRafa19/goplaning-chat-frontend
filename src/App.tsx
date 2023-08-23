@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import './App.css'
+import HelloWorld from './components/HelloWorld'
 import useWebSocket from 'react-use-websocket'
+import Pessoa from './components/Pessoa'
 
 function App() {
   const appName = "My app"
@@ -25,21 +27,12 @@ function App() {
   });
 
   
-
-
   return (
     <div className='App'>
       <h1>{appName}</h1>
-      <h2>Alterando o HTML</h2>
-      <p>Conectado: {isConnected ? 'Sim' : 'Não'}</p>
-
-
-
-      <ul>
-        {messages.map((message, index) => (
-          <li key={index}>{message}</li>
-        ))}
-      </ul>
+      
+      <HelloWorld  name='Joao'/>
+      <Pessoa idade={20} nome='Joao' sexo='M'/>
 
     </div>
   )
