@@ -1,41 +1,19 @@
-import { useState } from 'react'
-import './App.css'
-import HelloWorld from './components/HelloWorld'
-import useWebSocket from 'react-use-websocket'
-import Pessoa from './components/Pessoa'
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import RoomPage from "./pages/room/Room";
+import GamePage from "./pages/game/Game";
 
 function App() {
-  const appName = "My app"
-  const [isConnected, setIsConnected] = useState(false)
-  const [room, setRoom] = useState<string>('')
-  const [messages, setMesages] = useState<string[]>([])
+    return (
+        <Router>
+            <switch>
+                <Routes>
+                    <Route path="/" Component={RoomPage} />
+                    <Route path="/game/:room_id" Component={GamePage} />
+                </Routes>
+            </switch>
 
-  useWebSocket(`ws://localhost:8080/ws/b271f5e8-5c1e-4f17-ba00-cc203340eafd`, {
-    onOpen: () => {
-      setIsConnected(true)
-      console.log('WebSocket connection established.');
-    },
-    onMessage: (event) => {
-      console.log(`Received data: ${event.data}`);
-      setMesages([...messages, event.data])
-    }
-    ,  
-    onClose: () => {
-      setIsConnected(false)
-      console.log('WebSocket connection closed.');
-    }
-  });
-
-  
-  return (
-    <div className='App'>
-      <h1>{appName}</h1>
-      
-      <HelloWorld  name='Joao'/>
-      <Pessoa idade={20} nome='Joao' sexo='M'/>
-
-    </div>
-  )
+        </Router>
+    )
 }
 
 export default App
