@@ -1,6 +1,6 @@
 import axios from "axios";
 import Card from "../../components/card"
-import {  useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 interface CreateRoomResponse {
   created_room?: string
@@ -11,6 +11,7 @@ interface IsRoomActive {
 
 function RoomPage() {
   const navigate = useNavigate();
+
 
   function getRoom() {
     const base_url = import.meta.env.VITE_API_URL
@@ -23,11 +24,14 @@ function RoomPage() {
     });
   }
 
+
+
+
   function enterRoom(roomId: string) {
     axios<IsRoomActive>(`${import.meta.env.VITE_API_URL}/activeroom/${roomId}`).then(response => {
-      if(response.data.active == false){
+      if (response.data.active == false) {
         alert("Sala desativada ou não encontrada!")
-      }else {
+      } else {
         navigate(`/game/${roomId}`)
       }
     }).catch(reason => {

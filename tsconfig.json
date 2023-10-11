@@ -13,6 +13,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "types": [
+      "vite-plugin-terminal/client",
+    ],
 
     /* Linting */
     "strict": true,
